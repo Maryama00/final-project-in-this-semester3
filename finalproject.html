@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital Appointment System</title>
+    <!-- <link rel="stylesheet"href="style.class"></link> -->
+     <style>
+        body {
+    font-family: Arial;
+    background: linear-gradient(to right, #11998e, #38ef7d);
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    width: 380px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+input, select {
+    width: 90%;
+    padding: 10px;
+    margin: 8px;
+    border-radius: 8px;
+    border: 1px solid gray;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    background: #11998e;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0f7c73;
+}
+
+li {
+    background: #f4f4f4;
+    margin: 5px;
+    padding: 8px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.delete {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+     </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Hospital Appointment Booking</h1>
+
+    <input type="text" id="patientName" placeholder="Patient Name">
+
+    <select id="doctor">
+        <option value="">Select Doctor</option>
+        <option>Dr. Ahmed</option>
+        <option>Dr. Fatima</option>
+        <option>Dr. Hassan</option>
+    </select>
+
+    <input type="date" id="date">
+
+    <button onclick="bookAppointment()">Book Appointment</button>
+
+    <p id="message"></p>
+
+    <h3>Appointments</h3>
+    <ul id="appointmentList"></ul>
+</div>
+<script>
+    let appointments = [];
+
+function bookAppointment() {
+
+    let name = document.getElementById("patientName").value;
+    let doctor = document.getElementById("doctor").value;
+    let date = document.getElementById("date").value;
+    let message = document.getElementById("message");
+
+    // Validation
+    if (name === "" || doctor === "" || date === "") {
+        message.innerHTML = "Please fill all fields!";
+        message.style.color = "red";
+        return;
+    }
+
+    let appointment = {
+        name: name,
+        doctor: doctor,
+        date: date
+    };
+
+    appointments.push(appointment);
+
+    message.innerHTML = "Appointment Booked!";
+    message.style.color = "green";
+
+    document.getElementById("patientName").value = "";
+    document.getElementById("doctor").value = "";
+    document.getElementById("date").value = "";
+
+    displayAppointments();
+}
+
+function displayAppointments() {
+
+    let list = document.getElementById("appointmentList");
+    list.innerHTML = "";
+
+    appointments.forEach((app, index) => {
+
+        list.innerHTML += `
+        <li>
+            ${app.name} - ${app.doctor} - ${app.date}
+            <button class="delete" onclick="deleteAppointment(${index})">X</button>
+        </li>
+        `;
+    });
+}
+
+function deleteAppointment(index) {
+    appointments.splice(index, 1);
+    displayAppointments();
+}
+
+</script>
+
+
+</body>
+</html>
