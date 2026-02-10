@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Hospital Appointment System</title>
-    <!-- <link rel="stylesheet"href="style.class"></link> -->
+
      <style>
         body {
     font-family: Arial;
@@ -13,12 +13,12 @@
 }
 
 .container {
-    background: white;
+    background:green;
     padding: 30px;
     width: 380px;
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    text-align: center;
+    text-align: center
 }
 
 input, select {
@@ -111,7 +111,7 @@ function bookAppointment() {
 
     message.innerHTML = "Appointment Booked!";
     message.style.color = "green";
-
+    // selecting elements using dom manipulation
     document.getElementById("patientName").value = "";
     document.getElementById("doctor").value = "";
     document.getElementById("date").value = "";
